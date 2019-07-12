@@ -29,7 +29,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/scripts/vendors.bundle.js",
+              "src/assets/scripts/scripts.bundle.js"
+            ]
           },
           "configurations": {
             "production": {
