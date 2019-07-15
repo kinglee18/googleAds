@@ -31,7 +31,8 @@
             ],
             "scripts": [
               "src/assets/scripts/vendors.bundle.js",
-              "src/assets/scripts/scripts.bundle.js"
+              "src/assets/scripts/scripts.bundle.js",
+              "src/assets/scripts/dashboard.js"              
             ]
           },
           "configurations": {

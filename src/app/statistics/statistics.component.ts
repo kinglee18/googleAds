@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var google: any;
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit() {
+  
+    
   }
 
 }
