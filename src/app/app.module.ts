@@ -11,6 +11,10 @@ import { HealthCheckComponent } from './components/health-check/health-check.com
 import { GoogleCampaingComponent } from './components/google-campaing/google-campaing.component';
 import { CustomMaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccountComponent } from './components/campaing-stepts/account/account.component';
+import { CampaingComponent } from './components/campaing-stepts/campaing/campaing.component';
+import { GroupsComponent } from './components/campaing-stepts/groups/groups.component';
+import { AnnouncementsComponent } from './components/campaing-stepts/announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     StatisticsComponent,
     HealthCheckComponent,
     GoogleCampaingComponent,
+    AccountComponent,
+    CampaingComponent,
+    GroupsComponent,
+    AnnouncementsComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class GoogleCampaingComponent implements OnInit {
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup
+  secondFormGroup: FormGroup;
+  businessName: string = 'Nombre de negocio';
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {

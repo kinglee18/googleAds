@@ -1,45 +1,33 @@
 <div>
+  <div class="alert alert-light alert-elevate kt-alert--icon" role="alert">
+    <div class="alert-text">
+      {{ businessName }}
+    </div>
+  </div>
+
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Last name, First name"
-            formControlName="firstCtrl"
-            required
-          />
-        </mat-form-field>
-        <div>
-          <!-- <button mat-button matStepperNext>Next</button> -->
-        </div>
+        <ng-template matStepLabel>Cuenta</ng-template>
+        <app-account></app-account>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Address"
-            formControlName="secondCtrl"
-            required
-          />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+        <ng-template matStepLabel>Campaña</ng-template>
+        <app-campaing></app-campaing>
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+      <ng-template matStepLabel>Grupo de anuncios</ng-template>
+      <app-groups></app-groups>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Anuncios</ng-template>
+      <app-announcements></app-announcements>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirmacion</ng-template>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

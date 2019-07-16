@@ -3,7 +3,9 @@ import {
   MatCheckboxModule,
   MatStepperModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatIconModule,
+  MatAutocompleteModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 
@@ -13,6 +15,8 @@ const list = [
   MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
+  MatIconModule, 
+  MatAutocompleteModule
   
 ];
 @NgModule({
