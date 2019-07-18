@@ -1,0 +1,21 @@
+.extension-container {
+  padding: 5% 30%;
+
+  .kt-portlet {
+    border: 2px solid rgba(34, 185, 255, 0.2);
+    padding: 10px 10px;
+    mat-icon {
+      right: -100%;
+      top: -20px;
+      position: relative;
+      cursor: pointer;
+    }
+  }
+
+  span {
+    margin: 5% 45%;
+    mat-icon {
+      cursor: pointer;
+    }
+  }
+}

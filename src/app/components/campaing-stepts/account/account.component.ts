@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
+import { CampaingStepps } from 'src/app/campaing-stepps';
 
 @Component({
   selector: "app-account",
   templateUrl: "./account.component.html",
   styleUrls: ["./account.component.scss"]
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent extends CampaingStepps implements OnInit {
   searchResults: Array<any> = [{
     name: "pendingAccounts"
   }];
@@ -14,6 +15,7 @@ export class AccountComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
+    super();
     this.form = this.fb.group({
       searchAccount: []
     });
@@ -32,4 +34,8 @@ export class AccountComponent implements OnInit {
   }
 
   createAccount(account: any) {}
+
+  submit(): void {
+    this.advanceStep();
+  }
 }

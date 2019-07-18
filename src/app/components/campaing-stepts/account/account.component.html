@@ -1,28 +1,36 @@
-<form [formGroup]="form">
-  <mat-form-field>
-    <input
-      type="text"
-      placeholder="Buscar cuenta existente"
-      aria-label="Number"
-      matInput
-      formControlName="searchAccount"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of searchResults" [value]="option">
-        {{ option.name }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <h4>Cuentas nuevas pendientes por crear</h4>
-  <div id="accounts-container">
-    <ul>
-      <li *ngFor="let account of pendingAccounts">
-        <p>
-          {{ account.name }}
-          <u (click)="createAccount(account)">Crear y publicar</u>
-        </p>
-      </li>
-    </ul>
+<form [formGroup]="form" (submit)="submit()">
+  <div class="row" >
+    <mat-form-field class="col-md-6">
+      <input
+        type="text"
+        placeholder="Buscar cuenta existente"
+        aria-label="Number"
+        matInput
+        formControlName="searchAccount"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of searchResults" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div class="col-md-6">
+      <h4>Cuentas nuevas pendientes por crear</h4>
+      <div id="accounts-container">
+        <ul>
+          <li *ngFor="let account of pendingAccounts">
+            <p>
+              {{ account.name }}
+              <u (click)="createAccount(account)">Crear y publicar</u>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="submit" class="btn btn-brand col-md-2 offset-md-5">Continuar</button>
   </div>
 </form>

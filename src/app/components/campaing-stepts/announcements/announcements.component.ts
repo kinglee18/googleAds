@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { CampaingStepps } from "src/app/campaing-stepps";
+import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'app-announcements',
-  templateUrl: './announcements.component.html',
-  styleUrls: ['./announcements.component.scss']
+  selector: "app-announcements",
+  templateUrl: "./announcements.component.html",
+  styleUrls: ["./announcements.component.scss"]
 })
-export class AnnouncementsComponent implements OnInit {
+export class AnnouncementsComponent extends CampaingStepps implements OnInit {
+  form: FormArray;
 
-  constructor() { }
+  groupsNumber = [3, 3, 3];
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
+    super();
   }
 
+  ngOnInit() {
+    this.form = this.fb.array([]);
+  }
+
+  assignGroups(): void {
+    for (let group of this.groupsNumber) {
+    }
+  }
+
+  announcementForm(): FormGroup {
+    return new FormGroup({
+      url: new FormControl()
+    });
+  }
+ 
 }
