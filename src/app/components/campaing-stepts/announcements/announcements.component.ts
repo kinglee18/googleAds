@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CampaingStepps } from "src/app/campaing-stepps";
 import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
+import { Group } from 'src/app/group';
 
 @Component({
   selector: "app-announcements",
@@ -10,18 +11,22 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
 export class AnnouncementsComponent extends CampaingStepps implements OnInit {
   form: FormArray;
 
-  groupsNumber = [3, 3, 3];
+  groupsNumber = [{}, {}, {}];
 
+  
   constructor(private fb: FormBuilder) {
     super();
   }
 
   ngOnInit() {
-    this.form = this.fb.array([]);
+    this.assignGroups();
   }
 
   assignGroups(): void {
-    for (let group of this.groupsNumber) {
+    for (const group of this.groupsNumber) {
+      group['form'] =  new FormGroup({
+        announcements: new FormArray([this.announcementForm()])
+      });
     }
   }
 

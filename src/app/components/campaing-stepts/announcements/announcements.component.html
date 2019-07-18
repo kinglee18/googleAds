@@ -1,3 +1,26 @@
-<p>
-  announcements works!
-</p>
+<div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let group of groupsNumber">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Grupo: </b>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="group.form">
+        <div
+          formArrayName="announcements"
+          *ngFor="
+            let ex of group.form.get('announcements').controls;
+            let i = index
+          "
+        >
+          <div [formGroupName]="i">
+            <mat-form-field class="col-md-6">
+              <input matInput formControlName="url" placeholder="url" />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
