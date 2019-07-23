@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import localeMX from '@angular/common/locales/es-MX';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { AccountComponent } from './components/campaing-stepts/account/account.c
 import { CampaingComponent } from './components/campaing-stepts/campaing/campaing.component';
 import { GroupsComponent } from './components/campaing-stepts/groups/groups.component';
 import { AnnouncementsComponent } from './components/campaing-stepts/announcements/announcements.component';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeMX, 'es');
 
 @NgModule({
   declarations: [

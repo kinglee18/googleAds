@@ -23,13 +23,6 @@
   </div>
 
   <div class="row">
-    <b class="col-md-2">Redes:</b>
-    <ul>
-      <li *ngFor="let network of networks">{{ network.name }}</li>
-    </ul>
-  </div>
-
-  <div class="row">
     <b class="col-md-2">Fecha de publicación:</b>
     <mat-form-field class="col-md-3">
       <input
@@ -60,17 +53,26 @@
     </mat-form-field>
   </div>
 
-  <div class="row"><b>Idioma:</b> {{ languaje }}</div>
-  <div class="row"><b>Presupuesto:</b> {{ budget }}</div>
-  <div class="row"><b>Puja:</b> {{ bid }}</div>
   <div class="row">
-    <b>Programación de anuncios:</b> {{ announcementSchedule }}
+    <b class="col-md-2">Redes:</b>
+    <ul>
+      <li *ngFor="let network of networks">{{ network.name }}</li>
+    </ul>
+  </div>
+
+  <div class="row"><b class="col-md-2">Idioma:</b> {{ languaje }}</div>
+  <div class="row"><b class="col-md-2">Presupuesto:</b> {{ budget }}</div>
+  <div class="row"><b class="col-md-2">Puja:</b> {{ bid }}</div>
+  <div class="row">
+    <b class="col-md-2">Programación de anuncios:</b> {{ announcementSchedule }}
   </div>
   <div class="row">
-    <b>Extenciones del anuncio:</b> {{ announcementExtensions }}
+    <b class="col-md-2">Extenciones del anuncio:</b>
+    {{ announcementExtensions }}
   </div>
   <div class="row">
-    <b>Extenciones del anuncio:</b> {{ announcementExtensions }}
+    <b class="col-md-2">Extenciones del anuncio:</b>
+    {{ announcementExtensions }}
   </div>
 
   <div class="extension-container">
@@ -80,11 +82,9 @@
         let ex of form.get('announcementExtensions').controls;
         let i = index
       "
-      class="kt-portlet  kt-portlet--border-bottom-brand row"
+      class="kt-portlet blue-box kt-portlet--border-bottom-brand row"
     >
-    <mat-icon (click)="removeAnnouncementExtensionForm(i)"
-    >cancel</mat-icon
-  >
+      <mat-icon (click)="removeAnnouncementExtensionForm(i)">cancel</mat-icon>
       <div class="col-md-12" [formGroupName]="i">
         <div class="row">
           <mat-form-field class="col-md-12">
@@ -130,14 +130,14 @@
   </div>
 
   <div class="row">
-    <b>Extenciones de texto destacado:</b>
+    <b class="col-md-4">Extenciones de texto destacado:</b>
   </div>
 
   <div class="extension-container">
     <div
       formArrayName="textExtensions"
       *ngFor="let ex of form.get('textExtensions').controls; let i = index"
-      class="kt-portlet  kt-portlet--border-bottom-brand row"
+      class="kt-portlet blue-box kt-portlet--border-bottom-brand row"
     >
       <mat-icon (click)="removeTextExtensionForm(i)">cancel</mat-icon>
       <div class="col-md-12" [formGroupName]="i">
@@ -180,6 +180,8 @@
     </span>
   </div>
   <div class="row">
-      <button type="submit" class="btn btn-brand col-md-2 offset-md-5">Continuar</button>
-    </div>
+    <button type="submit" class="btn btn-brand col-md-2 offset-md-5">
+      Continuar
+    </button>
+  </div>
 </form>

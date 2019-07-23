@@ -1,0 +1,26 @@
+form {
+  padding: 5% 20%;
+  > div {
+    padding: 10px;
+    i {
+      position: relative;
+      top: 200px;
+      right: -105%;
+    }
+    mat-icon{
+        position: relative;
+        top: -35px;
+        right: -100%;
+    }
+  }
+}
+
+.routes {
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+#separator{
+    padding-top: 15px;
+}

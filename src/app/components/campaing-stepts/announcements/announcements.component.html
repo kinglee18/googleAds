@@ -8,18 +8,130 @@
       </mat-expansion-panel-header>
       <form [formGroup]="group.form">
         <div
+          class="blue-box kt-portlet"
           formArrayName="announcements"
           *ngFor="
             let ex of group.form.get('announcements').controls;
             let i = index
           "
         >
+          <i class="fa fa-copy"></i>
+          <mat-icon>cancel</mat-icon>
+
           <div [formGroupName]="i">
-            <mat-form-field class="col-md-6">
-              <input matInput formControlName="url" placeholder="url" />
-            </mat-form-field>
+            <div class="row">
+              <div class="col-md-12">
+                  <b>Palabras clave:</b>
+                  <p></p>
+              </div>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  formControlName="finalUrl"
+                  placeholder="URL final"
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  #title1
+                  formControlName="title1"
+                  placeholder="Título 1"
+                  maxlength="{{titleLength}}"
+      
+                />
+                <mat-hint align="end"
+                  >{{ title1.value?.length || 0 }}/{{ titleLength }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  #title2
+                  formControlName="title2"
+                  placeholder="Título 2"
+                  maxlength="{{titleLength}}"
+                />
+                <mat-hint align="end"
+                  >{{ title2.value?.length || 0 }}/{{ titleLength }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  #title3
+                  formControlName="title3"
+                  placeholder="Título 3"
+                  maxlength="{{titleLength}}"
+                />
+                <mat-hint align="end"
+                  >{{ title3.value?.length || 0 }}/{{ titleLength }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div class="row routes">
+              <span class="col-md-3">
+                <p>Ruta visible</p>
+                <p>www.ejemplo.com/</p>
+              </span>
+
+              <mat-form-field class="col-md-4">
+                <input matInput formControlName="route1" placeholder="Ruta 1" />
+              </mat-form-field>
+
+              <p class="col-md-1" id="separator">/</p>
+              <mat-form-field class="col-md-4">
+                <input matInput formControlName="route2" placeholder="Ruta 2" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  #description1
+                  formControlName="description1"
+                  placeholder="Descripción 1"
+                  maxlength="{{descriptionLength}}"
+                />
+                <mat-hint align="end"
+                  >{{ description1.value?.length || 0 }}/{{
+                    descriptionLength
+                  }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input
+                  matInput
+                  #description2
+                  formControlName="description2"
+                  placeholder="Descripción 2"
+                  maxlength="{{descriptionLength}}"
+                />
+                <mat-hint align="end"
+                  >{{ description2.value?.length || 0 }}/{{
+                    descriptionLength
+                  }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
           </div>
         </div>
+        <span class="row">
+          <div class="col-md-3 offset-md-5">
+            <mat-icon (click)="addAnnouncement(group)">control_point</mat-icon>
+            <p>Agregar anuncio</p>
+          </div>
+        </span>
       </form>
     </mat-expansion-panel>
   </mat-accordion>

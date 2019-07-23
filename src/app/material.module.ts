@@ -38,7 +38,7 @@ export const MY_FORMATS = {
     dateInput: 'MM/YYYY',
   },
   display: {
-    dateInput: 'MM/YYYY',
+    dateInput: 'DD/MMM/YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
@@ -49,13 +49,9 @@ export const MY_FORMATS = {
   imports: list,
   exports: list,
   providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
-
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
 export class CustomMaterialModule {}

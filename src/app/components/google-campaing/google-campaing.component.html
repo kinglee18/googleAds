@@ -1,33 +1,67 @@
-<div>
-  <div class="alert alert-light alert-elevate kt-alert--icon" role="alert">
-    <div class="alert-text">
-      {{ businessName }}
+<div class="kt-grid">
+  <div
+    class="col-md-12"
+  >
+    <div class="alert alert-light alert-elevate kt-alert--icon" role="alert">
+      <div class="alert-text">
+        {{ businessName }}
+      </div>
     </div>
-  </div>
 
-  <mat-horizontal-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Cuenta</ng-template>
-        <app-account [stepper]="stepper"></app-account>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Campaña</ng-template>
-        <app-campaing [stepper]="stepper"></app-campaing>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Grupo de anuncios</ng-template>
-      <app-groups [stepper]="stepper"></app-groups>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Anuncios</ng-template>
-      <app-announcements [stepper]="stepper"></app-announcements>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Confirmacion</ng-template>
-    </mat-step>
-  </mat-horizontal-stepper>
+    <mat-horizontal-stepper class="kt-portlet" [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Cuenta</ng-template>
+          <app-account [stepper]="stepper"></app-account>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Campaña</ng-template>
+          <app-campaing [stepper]="stepper"></app-campaing>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Grupo de anuncios</ng-template>
+        <app-groups [stepper]="stepper"></app-groups>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Anuncios</ng-template>
+        <app-announcements [stepper]="stepper"></app-announcements>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Confirmación</ng-template>
+        <div class="box-gray">
+          <h2 class="text-center">Tu campaña está lista</h2>
+          <b>Fecha de publicación: </b>
+          <p></p>
+          <b>Ubicación:</b>
+          <p></p>
+          <b>Objetivo:</b>
+          <p></p>
+          <b>Estrategia de puja:</b>
+          <p></p>
+          <b>Se publicó:</b>
+          <p></p>
+          <b>Se creó</b>
+          <p></p>
+          <b
+            >No se pudo instalar pixel de conversión porque el sitio no está
+            disponible</b
+          >
+        </div>
+        <div class=" text-center box-gray">
+          <h2>
+            El éxito de tu campaña puede verse afectado por la velocidad del
+            sitio web de destino
+          </h2>
+          <p>
+            0 to 49 (velocidad de carga lenta): Rojo <br />
+            50 to 89 (velocidad de carga promedio): Naranja <br />
+            90 to 100 (velocidad de carga rápida): Verde
+          </p>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
 </div>

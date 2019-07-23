@@ -1,2 +1,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.blue-box {
+  border: 2px solid rgba(34, 185, 255, 0.2);
+}
+
+.box-gray {
+  border: 2px solid #ebedf2;
+  padding: 15px;
+  margin-bottom: 15px;
+}
