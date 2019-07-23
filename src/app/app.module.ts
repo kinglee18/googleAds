@@ -17,6 +17,8 @@ import { CampaingComponent } from './components/campaing-stepts/campaing/campain
 import { GroupsComponent } from './components/campaing-stepts/groups/groups.component';
 import { AnnouncementsComponent } from './components/campaing-stepts/announcements/announcements.component';
 import { registerLocaleData } from '@angular/common';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { CampaingAbstractComponent } from './components/campaing-abstract/campaing-abstract.component'; 
 
 registerLocaleData(localeMX, 'es');
 
@@ -32,12 +34,14 @@ registerLocaleData(localeMX, 'es');
     CampaingComponent,
     GroupsComponent,
     AnnouncementsComponent,
+    CampaingAbstractComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
 
+    GoogleChartsModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule
 

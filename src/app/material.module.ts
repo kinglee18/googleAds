@@ -13,11 +13,11 @@ import {
   DateAdapter,
   MatAccordion,
   MatExpansionModule,
-  MatChipsModule
+  MatChipsModule,
+  MatTableModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 const list = [
   MatButtonModule,
@@ -30,7 +30,8 @@ const list = [
   MatSelectModule,
   MatDatepickerModule,
   MatExpansionModule,
-  MatChipsModule
+  MatChipsModule,
+  MatTableModule
 ];
 
 export const MY_FORMATS = {
