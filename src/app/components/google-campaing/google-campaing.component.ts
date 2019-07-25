@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { GoogleCampaingService } from 'src/app/google-campaing.service';
 
 @Component({
   selector: "app-google-campaing",
@@ -9,8 +10,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 export class GoogleCampaingComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  businessName: string = 'Nombre de negocio';
-  constructor(private fb: FormBuilder) {}
+  businessName: string ;
+  constructor(private fb: FormBuilder, private campaingService: GoogleCampaingService) {}
 
   ngOnInit() {
     this.firstFormGroup = this.fb.group({
@@ -20,5 +21,9 @@ export class GoogleCampaingComponent implements OnInit {
       secondCtrl: []
 
     });
+  }
+
+  get enableCampaingStep (){
+    return this.campaingService.getLastAccount();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
 import { CampaingStepps } from 'src/app/campaing-stepps';
+import { GoogleCampaingService } from 'src/app/google-campaing.service';
 
 @Component({
   selector: "app-account",
@@ -8,34 +8,28 @@ import { CampaingStepps } from 'src/app/campaing-stepps';
   styleUrls: ["./account.component.scss"]
 })
 export class AccountComponent extends CampaingStepps implements OnInit {
-  searchResults: Array<any> = [{
-    name: "pendingAccounts"
-  }];
   pendingAccounts: Array<any>;
-  form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private googleAccounts: GoogleCampaingService) {
     super();
-    this.form = this.fb.group({
-      searchAccount: []
-    });
   }
 
   ngOnInit() {
     this.pendingAccounts = [];
     this.pendingAccounts.push(
       {
-        name: "pendingAccounts"
+        name: "Cuenta 1 "
       },
       {
-        name: "pendingAccounts"
+        name: "Cuenta 2 "
       }
     );
   }
 
   createAccount(account: any) {}
 
-  submit(): void {
+  continue(): void {
+    this.googleAccounts.saveAccount(this.pendingAccounts[0]);
     this.advanceStep();
   }
 }

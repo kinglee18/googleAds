@@ -1,14 +1,12 @@
 <form [formGroup]="form">
   <mat-accordion formArrayName="groups">
     <mat-expansion-panel
-    
-      *ngFor="let ex of form.get('groups').controls; let i = index"
+      *ngFor="let ex of form.get('groups')['controls']; let i = index"
       [formGroupName]="i"
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
           <b>Grupo: </b>
-
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
@@ -17,8 +15,11 @@
             <mat-form-field>
               <mat-label>Tipo</mat-label>
               <mat-select formControlName="type">
-                <mat-option *ngFor="let e of words" [value]="e">
-                  {{ e }}
+                <mat-option
+                  *ngFor="let groupType of groupTypes"
+                  [value]="groupType.value"
+                >
+                  {{ groupType.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -28,29 +29,28 @@
           <b class="col-md-2">Palabras clave sugeridas:</b>
 
           <mat-chip-list #chipList class="col-md-10">
-            <mat-chip [removable]="true" *ngFor="let w of words" color="primary" selected
-              >{{ w }}
-              <mat-icon matChipRemove *ngIf="true">cancel</mat-icon></mat-chip
+            <mat-chip
+              *ngFor="let word of chip(i)"
+              [removable]="true"
+              (removed)="removeKeyWord(word, i)"
+              color="primary"
+              selected
+              >{{ word }} <mat-icon matChipRemove>cancel</mat-icon></mat-chip
             >
           </mat-chip-list>
         </div>
         <div class="row">
           <mat-form-field class="col-md-5">
             <input
-              type="text"
-              placeholder='Agregar otras palabras separadas por "comas"'
-              aria-label="Number"
               matInput
-              formControlName="searchwords"
-              [matAutocomplete]="auto"
+              formControlName="inputKeywords"
+              (keyup.enter)="addWords(i)"
+              placeholder='Agregar
+            otras palabras separadas por "comas"'
             />
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of searchResults" [value]="option">
-                {{ option.name }}
-              </mat-option>
-            </mat-autocomplete>
           </mat-form-field>
-          <mat-icon>control_point</mat-icon>
+
+          <mat-icon (click)="addWords(i)">control_point</mat-icon>
         </div>
         <div class="row">
           <div class="col-md-3">
@@ -66,14 +66,18 @@
   </mat-accordion>
 
   <span class="row">
-    <div class="col-md-3 offset-md-5">
+    <div class="col-md-12 text-center">
       <mat-icon (click)="addGroupForm()">control_point</mat-icon>
       <p>Agregar grupo</p>
     </div>
   </span>
 
   <div class="row">
-    <button class="btn btn-brand col-md-2 offset-md-5" (click)="continue()">
+    <button
+      type="button"
+      class="btn btn-brand col-md-2 offset-md-5"
+      (click)="continue()"
+    >
       Continuar
     </button>
   </div>

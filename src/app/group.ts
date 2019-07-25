@@ -1,5 +1,6 @@
-import { FormArray } from '@angular/forms';
+import { FormArray } from "@angular/forms";
 
 export interface Group {
-    announcements: Array<any>;
+  type: string;
+  keywordsList: string | Array<string>;
 }

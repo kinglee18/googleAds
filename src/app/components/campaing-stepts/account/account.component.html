@@ -1,20 +1,5 @@
-<form [formGroup]="form" (submit)="submit()">
-  <div class="row" >
-    <mat-form-field class="col-md-6">
-      <input
-        type="text"
-        placeholder="Buscar cuenta existente"
-        aria-label="Number"
-        matInput
-        formControlName="searchAccount"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of searchResults" [value]="option">
-          {{ option.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+<div>
+  <div class="row">
     <div class="col-md-6">
       <h4>Cuentas nuevas pendientes por crear</h4>
       <div id="accounts-container">
@@ -31,6 +16,13 @@
   </div>
 
   <div class="row">
-    <button type="submit" class="btn btn-brand col-md-2 offset-md-5">Continuar</button>
+    <button
+      type="button"
+      (click)="continue()"
+      class="btn btn-brand col-md-2 offset-md-5"
+      [disabled]="false"
+    >
+      Continuar
+    </button>
   </div>
-</form>
+</div>

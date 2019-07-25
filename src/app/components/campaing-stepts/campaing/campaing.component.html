@@ -2,6 +2,7 @@
   <div class="row">
     <mat-form-field class="col-md-6">
       <input
+        (focusout)="saveForm()"
         matInput
         formControlName="name"
         placeholder="Nombre de la campaña"
@@ -24,8 +25,11 @@
 
   <div class="row">
     <b class="col-md-2">Fecha de publicación:</b>
+  </div>
+    <div class="row">
     <mat-form-field class="col-md-3">
       <input
+        (dateChange)="saveForm()"
         matInput
         formControlName="pubDateInit"
         [matDatepicker]="publicationInit"
@@ -40,6 +44,7 @@
 
     <mat-form-field class="col-md-3">
       <input
+        (dateChange)="saveForm()"
         matInput
         formControlName="pubDateEnd"
         [matDatepicker]="publicationEnd"
@@ -60,26 +65,26 @@
     </ul>
   </div>
 
-  <div class="row"><b class="col-md-2">Idioma:</b> {{ languaje }}</div>
-  <div class="row"><b class="col-md-2">Presupuesto:</b> {{ budget }}</div>
-  <div class="row"><b class="col-md-2">Puja:</b> {{ bid }}</div>
+  <div class="row"><b class="col-md-2">Idioma:</b> dd</div>
+  <div class="row"><b class="col-md-2">Presupuesto:</b> d</div>
+  <div class="row"><b class="col-md-2">Puja:</b> d</div>
   <div class="row">
-    <b class="col-md-2">Programación de anuncios:</b> {{ announcementSchedule }}
+    <b class="col-md-2">Programación de anuncios:</b> d
   </div>
   <div class="row">
     <b class="col-md-2">Extenciones del anuncio:</b>
-    {{ announcementExtensions }}
+   d
   </div>
   <div class="row">
     <b class="col-md-2">Extenciones del anuncio:</b>
-    {{ announcementExtensions }}
+   d
   </div>
 
   <div class="extension-container">
     <div
       formArrayName="announcementExtensions"
       *ngFor="
-        let ex of form.get('announcementExtensions').controls;
+        let ex of form.get('announcementExtensions')['controls'];
         let i = index
       "
       class="kt-portlet blue-box kt-portlet--border-bottom-brand row"
@@ -89,43 +94,65 @@
         <div class="row">
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
+              #siteLink
+              maxlength="{{textLimit1}}"
               formControlName="text"
               placeholder="Texto de enlace de sitio"
             />
+            <mat-hint align="end"
+            >{{ siteLink.value?.length || 0 }}/{{
+              textLimit1
+            }}</mat-hint>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
+              maxlength="{{textLimit2}}"
+              #description1
               formControlName="descriptiveLineOne"
               placeholder="Linea descriptiva 1"
             />
+            <mat-hint align="end"
+            >{{ description1.value?.length || 0 }}/{{
+              textLimit2
+            }}</mat-hint>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
+              maxlength="{{textLimit2}}"
+              #description2
               formControlName="descriptiveLineTwo"
               placeholder="Linea descriptiva 2"
             />
+            <mat-hint align="end"
+            >{{ description2.value?.length || 0 }}/{{
+              textLimit2
+            }}</mat-hint>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field class="col-md-12">
-            <input matInput formControlName="url" placeholder="Sitio" />
+            <input
+              (focusout)="saveForm()" matInput formControlName="url" placeholder="Sitio" />
           </mat-form-field>
         </div>
       </div>
     </div>
 
     <span>
-      <mat-icon (click)="addannouncementExtensionForm()"
+      <mat-icon (click)="addAnnouncementExtensionForm()"
         >control_point</mat-icon
       >
-      <p>Agregar extensión de anuncio</p>
+      <p class="text-center">Agregar extensión de anuncio</p>
     </span>
   </div>
 
@@ -136,7 +163,7 @@
   <div class="extension-container">
     <div
       formArrayName="textExtensions"
-      *ngFor="let ex of form.get('textExtensions').controls; let i = index"
+      *ngFor="let ex of form.get('textExtensions')['controls']; let i = index"
       class="kt-portlet blue-box kt-portlet--border-bottom-brand row"
     >
       <mat-icon (click)="removeTextExtensionForm(i)">cancel</mat-icon>
@@ -144,31 +171,66 @@
         <div class="row">
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
               formControlName="outstandingText1"
               placeholder="Texto destacado 1"
+              #text1
+              maxlength="{{textLimit1}}"
             />
+            <mat-hint align="end"
+            >{{ text1.value?.length || 0 }}/{{
+              textLimit1
+            }}</mat-hint>
+            
           </mat-form-field>
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
               formControlName="outstandingText2"
               placeholder="Texto destacado 2"
+              #text2
+              maxlength="{{textLimit1}}"
             />
+            <mat-hint align="end"
+            >{{ text2.value?.length || 0 }}/{{
+              textLimit1
+            }}</mat-hint>
+            
+            
           </mat-form-field>
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
               formControlName="outstandingText3"
               placeholder="Texto destacado 3"
+              #text3
+              maxlength="{{textLimit1}}"
             />
+            <mat-hint align="end"
+            >{{ text3.value?.length || 0 }}/{{
+              textLimit1
+            }}</mat-hint>
+            
+            
           </mat-form-field>
           <mat-form-field class="col-md-12">
             <input
+              (focusout)="saveForm()"
               matInput
               formControlName="outstandingText4"
               placeholder="Texto destacado 4"
+              #text4
+              maxlength="{{textLimit1}}"
             />
+            <mat-hint align="end"
+            >{{ text4.value?.length || 0 }}/{{
+              textLimit1
+            }}</mat-hint>
+            
+            
           </mat-form-field>
         </div>
       </div>
@@ -176,7 +238,7 @@
 
     <span>
       <mat-icon (click)="addTextExtensionForm()">control_point</mat-icon>
-      <p>Agregar extensión de texto destacado</p>
+      <p class="text-center">Agregar extensión de texto destacado</p>
     </span>
   </div>
   <div class="row">

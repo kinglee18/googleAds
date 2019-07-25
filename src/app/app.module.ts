@@ -11,7 +11,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { HealthCheckComponent } from './components/health-check/health-check.component';
 import { GoogleCampaingComponent } from './components/google-campaing/google-campaing.component';
 import { CustomMaterialModule } from './material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AccountComponent } from './components/campaing-stepts/account/account.component';
 import { CampaingComponent } from './components/campaing-stepts/campaing/campaing.component';
 import { GroupsComponent } from './components/campaing-stepts/groups/groups.component';
@@ -43,8 +43,8 @@ registerLocaleData(localeMX, 'es');
 
     GoogleChartsModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

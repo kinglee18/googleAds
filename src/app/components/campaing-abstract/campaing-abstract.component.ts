@@ -1,44 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import { Component, OnInit } from "@angular/core";
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 @Component({
-  selector: 'app-campaing-abstract',
-  templateUrl: './campaing-abstract.component.html',
-  styleUrls: ['./campaing-abstract.component.scss']
+  selector: "app-campaing-abstract",
+  templateUrl: "./campaing-abstract.component.html",
+  styleUrls: ["./campaing-abstract.component.scss"]
 })
 export class CampaingAbstractComponent implements OnInit {
-
+  group: any;
   myData = [
-    ['London', 8136000],
-    ['New York', 8538000],
-    ['Paris', 2244000],
-    ['Berlin', 3470000],
-    ['Kairo', 19500000],
+    ["Consumo alto", 8136000],
+    ["Consumo bajo", 8538000],
+    ["Detenidas", 2244000],
+    ["Remanentes", 19500000]
   ];
 
+  displayedColumns: string[] = ["type", "number"];
+  dataSource = [
+    { type: "Activas", number: 34 },
+    { type: "Detenidas", number: 53 },
+    { type: "Con Anuncios Rechazados", number: 453 },
+    { type: "Con Remanente", number: 6941 },
+    { type: "Por optimizar", number: 41 }
+  ];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+  table2Column:  string[] =  ["name", "label", "googleId"]
+  table2 = [
+    {name: 'Cuenta 1', label: 'etiqueta', googleId: '74734'},
+    {name: 'Cuenta 2', label: 'etiqueta', googleId: '345'},
+    {name: 'Cuenta 3', label: 'etiqueta', googleId: '777'},
+    {name: 'Cuenta 4', label: 'etiqueta', googleId: '3345'},
 
-  ngOnInit() {
-  }
+  ];
+  constructor() {}
 
+  ngOnInit() {}
 }

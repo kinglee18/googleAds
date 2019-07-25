@@ -14,7 +14,8 @@ import {
   MatAccordion,
   MatExpansionModule,
   MatChipsModule,
-  MatTableModule
+  MatTableModule,
+  MatTabsModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -31,7 +32,8 @@ const list = [
   MatDatepickerModule,
   MatExpansionModule,
   MatChipsModule,
-  MatTableModule
+  MatTableModule,
+  MatTabsModule
 ];
 
 export const MY_FORMATS = {
