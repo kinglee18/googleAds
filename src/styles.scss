@@ -12,6 +12,9 @@
   margin: 10px;
 }
 
+.cursor-pt{
+  cursor: pointer;
+}
 
 
 $local: (
@@ -40,11 +43,6 @@ $local: (
 );
 $candy-app-primary: mat-palette($local);
 $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
-
 @include angular-material-theme($candy-app-theme);

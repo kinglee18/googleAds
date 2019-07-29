@@ -15,8 +15,8 @@
             let i = index
           "
         >
-          <i class="fa fa-copy"></i>
-          <mat-icon>cancel</mat-icon>
+          <i class="fa fa-copy cursor-pt" (click)="duplicateForm(i, group)"></i>
+          <mat-icon class="cursor-pt" (click)="removeForm(i, group)">cancel</mat-icon>
 
           <div [formGroupName]="i">
             <div class="row">
