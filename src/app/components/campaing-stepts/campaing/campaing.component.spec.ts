@@ -1,16 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CampaingComponent } from './campaing.component';
+import { CampaingComponent } from "./campaing.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CustomMaterialModule } from "src/app/material.module";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-describe('CampaingComponent', () => {
+describe("CampaingComponent", () => {
   let component: CampaingComponent;
   let fixture: ComponentFixture<CampaingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CampaingComponent ]
-    })
-    .compileComponents();
+      declarations: [CampaingComponent],
+      imports: [
+        ReactiveFormsModule,
+        CustomMaterialModule,
+        BrowserModule,
+        BrowserAnimationsModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +28,7 @@ describe('CampaingComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

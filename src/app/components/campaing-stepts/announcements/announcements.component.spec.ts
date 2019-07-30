@@ -1,16 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AnnouncementsComponent } from './announcements.component';
+import { AnnouncementsComponent } from "./announcements.component";
+import { CustomMaterialModule } from "src/app/material.module";
+import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-describe('AnnouncementsComponent', () => {
+describe("AnnouncementsComponent", () => {
   let component: AnnouncementsComponent;
   let fixture: ComponentFixture<AnnouncementsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnnouncementsComponent ]
-    })
-    .compileComponents();
+      declarations: [AnnouncementsComponent],
+      imports: [
+        CustomMaterialModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        BrowserAnimationsModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +28,7 @@ describe('AnnouncementsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
