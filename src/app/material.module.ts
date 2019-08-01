@@ -11,11 +11,11 @@ import {
   MAT_DATE_LOCALE,
   MAT_DATE_FORMATS,
   DateAdapter,
-  MatAccordion,
   MatExpansionModule,
   MatChipsModule,
   MatTableModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -33,7 +33,8 @@ const list = [
   MatExpansionModule,
   MatChipsModule,
   MatTableModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 ];
 
 export const MY_FORMATS = {

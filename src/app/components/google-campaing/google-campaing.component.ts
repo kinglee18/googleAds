@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { GoogleCampaingService } from 'src/app/google-campaing.service';
+import { GoogleCampaingService } from "src/app/google-campaing.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Group } from 'src/app/group';
 
 @Component({
   selector: "app-google-campaing",
@@ -8,22 +10,37 @@ import { GoogleCampaingService } from 'src/app/google-campaing.service';
   styleUrls: ["./google-campaing.component.scss"]
 })
 export class GoogleCampaingComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  businessName: string ;
-  constructor(private fb: FormBuilder, private campaingService: GoogleCampaingService) {}
+  account: Account;
+  groupFormState = true;
+  groups: Array<Group> = [];
+
+  constructor(
+    private campaingService: GoogleCampaingService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.firstFormGroup = this.fb.group({
-      firstCtrl: []
-    });
-    this.secondFormGroup = this.fb.group({
-      secondCtrl: []
-
+    this.activatedRoute.parent.params.subscribe(data => {
+      this.getAccountInfo(data.id);
     });
   }
 
-  get enableCampaingStep (){
-    return this.campaingService.getLastAccount();
+  getAccountInfo(id: string) {
+    this.campaingService.getAccount(id).subscribe(
+      account => {
+        this.account = account;
+      },
+      error => {
+        //implementar 404
+        console.error(error);
+      }
+    );
+  }
+
+  getGroups(form: FormGroup) {
+    this.groupFormState = form.valid;
+    this.groups = form.value.groups;
+    console.log(this.groups.length);
+    
   }
 }

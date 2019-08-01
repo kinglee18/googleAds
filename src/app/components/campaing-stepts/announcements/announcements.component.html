@@ -6,7 +6,7 @@
           <b>Grupo: </b>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <form [formGroup]="group.form">
+      <form [formGroup]="group.form" *ngIf="group.form">
         <div
           class="blue-box kt-portlet"
           formArrayName="announcements"
@@ -16,19 +16,22 @@
           "
         >
           <i class="fa fa-copy cursor-pt" (click)="duplicateForm(i, group)"></i>
-          <mat-icon class="cursor-pt" (click)="removeForm(i, group)">cancel</mat-icon>
+          <mat-icon class="cursor-pt" (click)="removeForm(i, group)"
+            >cancel</mat-icon
+          >
 
           <div [formGroupName]="i">
             <div class="row">
               <div class="col-md-12">
-                  <b>Palabras clave:</b>
-                  <p></p>
+                <b>Palabras clave: {{ group.keywordsList }}</b>
+                <p></p>
               </div>
             </div>
             <div class="row">
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   formControlName="finalUrl"
                   placeholder="URL final"
                 />
@@ -38,11 +41,11 @@
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   #title1
                   formControlName="title1"
                   placeholder="Título 1"
-                  maxlength="{{titleLength}}"
-      
+                  maxlength="{{ titleLength }}"
                 />
                 <mat-hint align="end"
                   >{{ title1.value?.length || 0 }}/{{ titleLength }}</mat-hint
@@ -53,10 +56,11 @@
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   #title2
                   formControlName="title2"
                   placeholder="Título 2"
-                  maxlength="{{titleLength}}"
+                  maxlength="{{ titleLength }}"
                 />
                 <mat-hint align="end"
                   >{{ title2.value?.length || 0 }}/{{ titleLength }}</mat-hint
@@ -67,10 +71,11 @@
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   #title3
                   formControlName="title3"
                   placeholder="Título 3"
-                  maxlength="{{titleLength}}"
+                  maxlength="{{ titleLength }}"
                 />
                 <mat-hint align="end"
                   >{{ title3.value?.length || 0 }}/{{ titleLength }}</mat-hint
@@ -84,22 +89,33 @@
               </span>
 
               <mat-form-field class="col-md-4">
-                <input matInput formControlName="route1" placeholder="Ruta 1" />
+                <input
+                  matInput
+                  (focusout)="saveForm()"
+                  formControlName="route1"
+                  placeholder="Ruta 1"
+                />
               </mat-form-field>
 
               <p class="col-md-1" id="separator">/</p>
               <mat-form-field class="col-md-4">
-                <input matInput formControlName="route2" placeholder="Ruta 2" />
+                <input
+                  matInput
+                  (focusout)="saveForm()"
+                  formControlName="route2"
+                  placeholder="Ruta 2"
+                />
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   #description1
                   formControlName="description1"
                   placeholder="Descripción 1"
-                  maxlength="{{descriptionLength}}"
+                  maxlength="{{ descriptionLength }}"
                 />
                 <mat-hint align="end"
                   >{{ description1.value?.length || 0 }}/{{
@@ -112,10 +128,11 @@
               <mat-form-field class="col-md-12">
                 <input
                   matInput
+                  (focusout)="saveForm()"
                   #description2
                   formControlName="description2"
                   placeholder="Descripción 2"
-                  maxlength="{{descriptionLength}}"
+                  maxlength="{{ descriptionLength }}"
                 />
                 <mat-hint align="end"
                   >{{ description2.value?.length || 0 }}/{{
@@ -128,11 +145,22 @@
         </div>
         <span class="row">
           <div class="col-md-12 text-center">
-            <mat-icon (click)="addAnnouncement(group)">control_point</mat-icon>
+            <mat-icon (click)="addAnnouncement(group)" class="cursor-pt"
+              >control_point</mat-icon
+            >
             <p>Agregar anuncio</p>
           </div>
         </span>
       </form>
     </mat-expansion-panel>
   </mat-accordion>
+  <div class="row">
+    <button
+      type="button"
+      class="btn btn-brand col-md-2 offset-md-5"
+      (click)="finishCampaing()"
+    >
+      Finalizar
+    </button>
+  </div>
 </div>

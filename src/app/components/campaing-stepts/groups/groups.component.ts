@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { CampaingStepps } from "src/app/campaing-stepps";
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   FormArray,
-  AbstractControl
+  Validators
 } from "@angular/forms";
 import { GoogleCampaingService } from "src/app/google-campaing.service";
 import { Group } from "src/app/group";
@@ -16,6 +16,7 @@ import { Group } from "src/app/group";
   styleUrls: ["./groups.component.scss"]
 })
 export class GroupsComponent extends CampaingStepps implements OnInit {
+  @Output() formEmitter: EventEmitter<FormGroup> = new EventEmitter();
   form: FormGroup;
   groupTypes = [
     {
@@ -25,7 +26,7 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
     { name: "Dinámico", value: "dynamic" }
   ];
 
-  suggestedWords = ["Palabra 1 ", "Palabra 2"];
+  suggestedWords = ["Palabra 1 ", " Palabra 2"];
 
   constructor(
     private fb: FormBuilder,
@@ -39,16 +40,16 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
       groups: this.fb.array([])
     });
 
-    const groups = this.getStoredGroups();
-    console.log(groups);
-
+    const groups = this.account.groups;
     if (groups) {
       for (const group of groups) {
         this.addGroupForm(group);
+        this.formEmitter.emit(this.form);
       }
     } else {
       this.addGroupForm();
     }
+    this.updateForm();
   }
 
   get groupsArray(): FormArray {
@@ -61,9 +62,9 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
 
   groupForm(group?: Group): FormGroup {
     const fg = new FormGroup({
-      type: new FormControl(),
+      type: new FormControl(null, [Validators.required]),
       inputKeywords: new FormControl(),
-      keywordsList: new FormControl(this.suggestedWords.toString())
+      keywordsList: new FormControl(this.suggestedWords.toString(), [Validators.required])
     });
     if (group) {
       fg.patchValue(group);
@@ -95,16 +96,12 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
   }
 
   continue() {
-    this.campaingService.saveGroups(this.form.value);
+    this.saveForm();
     this.advanceStep();
   }
 
   saveForm() {
-    this.campaingService.saveGroups(this.form.get("groups").value);
-  }
-
-  getStoredGroups(): Array<Group> {
-    return this.campaingService.getLastAccount().groups as Array<Group>;
+    this.campaingService.saveGroups(this.form.value.groups, this.account.id);
   }
 
   removeKeyWord(word: string, index: number) {
@@ -112,6 +109,7 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
     const regex = `[,]*${word}[\\s]*`;
     const words = list.value.replace(new RegExp(regex), "") as string;
     list.setValue(words);
+    this.saveForm();
   }
 
   chip(index: number): Array<string> {
@@ -121,5 +119,13 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
       .filter((word: string) => {
         return word.length >= 1;
       });
+  }
+
+  updateForm() {
+    this.form.valueChanges.subscribe(
+      data => {
+        this.formEmitter.emit(this.form);
+      }
+    );
   }
 }

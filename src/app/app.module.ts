@@ -19,6 +19,7 @@ import { AnnouncementsComponent } from './components/campaing-stepts/announcemen
 import { registerLocaleData } from '@angular/common';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { CampaingAbstractComponent } from './components/campaing-abstract/campaing-abstract.component'; 
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeMX, 'es');
 
@@ -44,7 +45,8 @@ registerLocaleData(localeMX, 'es');
     GoogleChartsModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,33 +1,95 @@
 <div class="kt-grid">
   <div class="col-md-12">
     <div class="kt-portlet">
-      <h2 class="kt-portlet__head-title ng-star-inserted">{{ businessName  || 'Elige una cuenta' }}</h2>
-      <mat-horizontal-stepper  #stepper>
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Cuenta</ng-template>
-            <app-account [stepper]="stepper"></app-account>
-          </form>
+      <h2 class="kt-portlet__head-title ng-star-inserted" *ngIf="account">
+        {{ account.name }}
+      </h2>
+      <mat-horizontal-stepper #stepper linear *ngIf="account">
+        <mat-step>
+          <ng-template matStepLabel>Cuenta</ng-template>
+          <div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Cuenta pendiente por crear</h4>
+                <table class="mat-table" id="accounts-container">
+                  <thead>
+                    <tr class="mat-header-row">
+                      <th
+                        class="mat-header-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        Ad id
+                      </th>
+                      <th
+                        class="mat-header-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        Fecha de captura
+                      </th>
+                      <th
+                        class="mat-header-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        Cuenta
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="mat-row">
+                      <td
+                        class="mat-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        {{ account.id }}
+                      </td>
+                      <td
+                        class="mat-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        {{ account.creationDate }}
+                      </td>
+                      <td
+                        class="mat-cell cdk-column-type mat-column-type ng-star-inserted"
+                      >
+                        {{ account.name }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <button
+                type="button"
+                matStepperNext
+                class="btn btn-brand col-md-2 offset-md-5"
+              >
+                Continuar
+              </button>
+            </div>
+          </div>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
+        <mat-step>
+          <form>
             <ng-template matStepLabel>Campaña</ng-template>
             <app-campaing
               [stepper]="stepper"
-              *ngIf="enableCampaingStep"
+              [account]="account"
             ></app-campaing>
           </form>
         </mat-step>
-        <mat-step>
+        <mat-step [completed]="groupFormState">
           <ng-template matStepLabel>Grupo de anuncios</ng-template>
           <app-groups
             [stepper]="stepper"
-            *ngIf="enableCampaingStep"
+            [account]="account"
+            (formEmitter)="getGroups($event)"
           ></app-groups>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Anuncios</ng-template>
-          <app-announcements [stepper]="stepper"></app-announcements>
+          <app-announcements
+            [stepper]="stepper"
+            [account]="account"
+            [groups]="groups"
+            *ngIf="groups.length"
+          ></app-announcements>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Confirmación</ng-template>
@@ -63,6 +125,7 @@
           </div>
         </mat-step>
       </mat-horizontal-stepper>
+      <mat-spinner *ngIf="!account"></mat-spinner>
     </div>
   </div>
 </div>

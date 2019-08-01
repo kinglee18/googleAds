@@ -8,14 +8,14 @@ import { GoogleCampaingComponent } from './components/google-campaing/google-cam
 import { CampaingAbstractComponent } from './components/campaing-abstract/campaing-abstract.component';
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
+  { path: "login/:id", component: LoginComponent },
   {
-    path: "dashboard",
+    path: "dashboard/:id",
     component: DashboardComponent,
     children: [
       {
         path: "statistics",
-        component: StatisticsComponent
+        component: StatisticsComponent,
       },
       {
         path: "health_check",

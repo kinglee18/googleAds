@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { CampaingStepps } from "src/app/campaing-stepps";
 import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
+import { GoogleCampaingService } from "src/app/google-campaing.service";
+import { Group } from "src/app/group";
 
 @Component({
   selector: "app-announcements",
@@ -8,12 +10,16 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
   styleUrls: ["./announcements.component.scss"]
 })
 export class AnnouncementsComponent extends CampaingStepps implements OnInit {
+  @Input() groups: Array<Group>;
   form: FormArray;
   titleLength = 30;
   descriptionLength = 90;
-  groupsNumber = [{}, {}, {}];
+  groupsNumber = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private googleService: GoogleCampaingService
+  ) {
     super();
   }
 
@@ -21,13 +27,17 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
     this.assignGroups();
   }
 
-  assignGroups(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    this.groupsNumber = JSON.parse(JSON.stringify(changes.groups.currentValue));
     for (const group of this.groupsNumber) {
+      const preValue = group.announcement ? group.announcement.value : {};
       group["form"] = new FormGroup({
-        announcements: new FormArray([this.announcementForm()])
+        announcements: new FormArray([this.announcementForm(preValue)])
       });
     }
   }
+
+  assignGroups(): void {}
 
   announcementForm(values?: any): FormGroup {
     const fg = new FormGroup({
@@ -59,7 +69,26 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
     this.getAnnouncementArray(group).push(this.announcementForm(form));
   }
 
-  removeForm(index: number, group){
+  removeForm(index: number, group) {
     this.getAnnouncementArray(group).removeAt(index);
   }
+
+  saveForm() {
+    let groupInfo: Array<Group> = this.groupsNumber;
+    groupInfo = groupInfo.map((grp: any) => {
+      grp.announcements = grp.form.value.announcements;
+      console.log(grp);
+      
+      return grp;
+    });
+console.log();
+
+    this.googleService.saveGroups(groupInfo, this.account.id);
+  }
+
+  formInfo() {
+    return {};
+  }
+
+  finishCampaing() {}
 }

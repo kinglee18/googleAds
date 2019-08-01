@@ -6,7 +6,7 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <b>Grupo: </b>
+          <b>Grupo:</b>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
@@ -14,7 +14,7 @@
           <div class="col-md-3">
             <mat-form-field>
               <mat-label>Tipo</mat-label>
-              <mat-select formControlName="type">
+              <mat-select formControlName="type" (selectionChange)="saveForm()">
                 <mat-option
                   *ngFor="let groupType of groupTypes"
                   [value]="groupType.value"
@@ -44,13 +44,13 @@
             <input
               matInput
               formControlName="inputKeywords"
-              (keyup.enter)="addWords(i)"
+              (keyup.enter)="onAddWord(i)"
               placeholder='Agregar
             otras palabras separadas por "comas"'
             />
           </mat-form-field>
 
-          <mat-icon (click)="addWords(i)">control_point</mat-icon>
+          <mat-icon (click)="onAddWord(i)" class="cursor-pt">control_point</mat-icon>
         </div>
         <div class="row">
           <div class="col-md-3">
@@ -77,6 +77,7 @@
       type="button"
       class="btn btn-brand col-md-2 offset-md-5"
       (click)="continue()"
+      [disabled]="!form.valid"
     >
       Continuar
     </button>

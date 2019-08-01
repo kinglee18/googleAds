@@ -1,7 +1,4 @@
-
-   
-  <div class="kt-grid kt-grid--hor kt-grid--root">
-
+<div class="kt-grid kt-grid--hor kt-grid--root">
   <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
     <button class="kt-aside-close " id="kt_aside_close_btn">
       <i class="la la-close"></i>
@@ -51,7 +48,7 @@
                   </li>
                   <li
                     class="kt-menu__item "
-                    routerLink="/dashboard/campaing_abstract"
+                    [routerLink]="['campaing_abstract']"
                     aria-haspopup="true"
                   >
                     <a class="kt-menu__link "
@@ -65,7 +62,7 @@
                   </li>
                   <li
                     class="kt-menu__item "
-                    routerLink="/dashboard/health_check"
+                    [routerLink]="['health_check']"
                     aria-haspopup="true"
                   >
                     <a class="kt-menu__link "
@@ -77,7 +74,7 @@
                   </li>
                   <li
                     class="kt-menu__item "
-                    routerLink="/dashboard/google_campaing"
+                    [routerLink]="['google_campaing']"
                     aria-haspopup="true"
                   >
                     <a class="kt-menu__link "
@@ -161,7 +158,8 @@
           </div>
           <div id="details">
             <span>Hola usuario</span>
-            <a routerLink="/login">Salir</a>
+            <a (click)="logout()"
+            >Salir</a>
           </div>
         </div>
       </div>

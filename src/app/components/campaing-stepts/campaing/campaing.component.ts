@@ -15,6 +15,15 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
   networks: Array<any>;
   textLimit1 = 25;
   textLimit2 = 35;
+  predefinedCampaing = {
+    networks: "Display, búsqueda",
+    pubDateInit: "15/08/2019",
+    pubDateEnd: "15/08/2019",
+    languaje: "Español",
+    budget: "2900",
+    bid: "Clics  (esta campaña usará la estrategia de puja Maximizar clics)",
+    schedule: "Todo el día"
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +41,7 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
       announcementExtensions: this.fb.array([]),
       textExtensions: this.fb.array([])
     });
-    const campaing = this.checkLocalInfo();
+    const campaing = this.account.campaing;
     if (campaing) {
       this.form.patchValue(campaing);
       this.addDynamicForms(
@@ -68,6 +77,7 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
 
   removeAnnouncementExtensionForm(index: number): void {
     this.announcementArray.removeAt(index);
+    this.saveForm();
   }
 
   announcementExtensionForm(value?: any): FormGroup {
@@ -112,6 +122,7 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
 
   removeTextExtensionForm(index: number): void {
     this.textArray.removeAt(index);
+    this.saveForm();
   }
 
   submit(): void {
@@ -119,11 +130,7 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
     this.advanceStep();
   }
 
-  checkLocalInfo(): Campaing {
-    return this.campaingService.getLastAccount().campaing as Campaing;
-  }
-
   saveForm() {
-    this.campaingService.saveCampaing(this.form.value);
+    this.campaingService.saveCampaing(this.form.value, this.account.id);
   }
 }
