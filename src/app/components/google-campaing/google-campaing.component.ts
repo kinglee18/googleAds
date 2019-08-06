@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { GoogleCampaingService } from "src/app/google-campaing.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Group } from 'src/app/group';
+import { Account } from 'src/app/account';
 
 @Component({
   selector: "app-google-campaing",
@@ -28,7 +29,7 @@ export class GoogleCampaingComponent implements OnInit {
   getAccountInfo(id: string) {
     this.campaingService.getAccount(id).subscribe(
       account => {
-        this.account = account;
+        this.account = new Account().deserialize(account);
       },
       error => {
         //implementar 404

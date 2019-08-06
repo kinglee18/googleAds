@@ -1,33 +1,17 @@
-import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { Component, Input, SimpleChanges } from "@angular/core";
 import { CampaingStepps } from "src/app/campaing-stepps";
 import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
 import { GoogleCampaingService } from "src/app/google-campaing.service";
-import { Group } from "src/app/group";
 
 @Component({
   selector: "app-announcements",
   templateUrl: "./announcements.component.html",
   styleUrls: ["./announcements.component.scss"]
 })
-export class AnnouncementsComponent extends CampaingStepps implements OnInit {
+export class AnnouncementsComponent extends CampaingStepps {
   @Input()
   set groups(value: any) {
-    this.groupsNumber = JSON.parse(JSON.stringify(value));
-    for (const group of this.groupsNumber) {
-      this.googleService
-        .getAnnouncementsById(this.account.id, group.id)
-        .subscribe((announcements: Array<any>) => {
-          let arr = new FormArray([this.announcementForm()]);
-          group["announcementForm"] = new FormGroup({
-            announcements: arr
-          });
-          if (announcements.length) {
-            (group["announcementForm"].get(
-              "announcements"
-            ) as FormArray).setValue(announcements);
-          }
-        });
-    }
+    this.fillAccordion(value);
   }
 
   titleLength = 30;
@@ -40,22 +24,6 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
   ) {
     super();
   }
-
-  ngOnInit() {
-    this.assignGroups();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    /*    this.groupsNumber = JSON.parse(JSON.stringify(changes.groups.currentValue));
-    for (const group of this.groupsNumber) {
-      const preValue = group.announcement ? group.announcement.value : {};
-      group["form"] = new FormGroup({
-        announcements: new FormArray([this.announcementForm(preValue)])
-      });
-    } */
-  }
-
-  assignGroups(): void {}
 
   announcementForm(values?: any): FormGroup {
     const fg = new FormGroup({
@@ -74,6 +42,24 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
     return fg;
   }
 
+  fillAccordion(groups) {
+    this.groupsNumber = JSON.parse(JSON.stringify(groups));
+    for (const group of this.groupsNumber) {
+      this.googleService
+        .getAnnouncementsById(this.account.id, group.id)
+        .subscribe((announcements: Array<any>) => {
+          let arr = new FormArray([this.announcementForm()]);
+          group["announcementForm"] = new FormGroup({
+            announcements: arr
+          });
+          if (announcements.length) {
+            (group["announcementForm"].get(
+              "announcements"
+            ) as FormArray).setValue(announcements);
+          }
+        });
+    }
+  }
   addAnnouncement(group: any) {
     this.getAnnouncementArray(group).push(this.announcementForm());
   }

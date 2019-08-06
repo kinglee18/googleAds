@@ -65,7 +65,9 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
       id: new FormControl(),
       type: new FormControl(null, [Validators.required]),
       inputKeywords: new FormControl(),
-      keywordsList: new FormControl(this.suggestedWords.toString(), [Validators.required])
+      keywordsList: new FormControl(this.suggestedWords.toString(), [
+        Validators.required
+      ])
     });
     if (group) {
       fg.patchValue(group);
@@ -101,12 +103,11 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
   }
 
   saveForm(index) {
-    
-    this.campaingService.saveGroup(this.groupsArray.controls[index].value, this.account.id).subscribe(
-      id => {
-        this.groupsArray.controls[index]['controls']['id'].setValue(id);
-      }
-    );
+    this.campaingService
+      .saveGroup(this.groupsArray.controls[index].value, this.account.id)
+      .subscribe(id => {
+        this.groupsArray.controls[index]["controls"]["id"].setValue(id);
+      });
   }
 
   removeKeyWord(word: string, index: number) {
@@ -127,10 +128,8 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
   }
 
   updateForm() {
-    this.form.valueChanges.subscribe(
-      data => {
-        this.formEmitter.emit(this.form);
-      }
-    );
+    this.form.valueChanges.subscribe(data => {
+      this.formEmitter.emit(this.form);
+    });
   }
 }

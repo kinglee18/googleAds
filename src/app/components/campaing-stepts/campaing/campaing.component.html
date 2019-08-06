@@ -59,28 +59,28 @@
   </div>
 
   <div class="row">
-    <b class="col-md-2">Ubicaciones:</b>
+    <b class="col-md-3">Ubicaciones:</b>
     <ul>
       <li *ngFor="let network of networks">{{ network.name }}</li>
     </ul>
   </div>
   <div class="row">
-    <b class="col-md-2">Redes:</b>
+    <b class="col-md-3">Redes:</b>
     <ul>
       <li *ngFor="let network of networks">{{ network.name }}</li>
     </ul>
   </div>
-  <div class="row"><b class="col-md-2">Idioma:</b> dd</div>
-  <div class="row"><b class="col-md-2">Presupuesto:</b> d</div>
-  <div class="row"><b class="col-md-2">Puja:</b> d</div>
-  <div class="row"><b class="col-md-2">Programación de anuncios:</b> d</div>
+  <div class="row"><b class="col-md-3">Idioma:</b> {{ account.campaing.language }}</div>
+  <div class="row"><b class="col-md-3">Presupuesto:</b> {{ account.campaing.budget }}</div>
+  <div class="row"><b class="col-md-3">Puja: </b> {{ account.campaing.bid }} </div>
+  <div class="row"><b class="col-md-3">Programación de anuncios:</b> {{ account.campaing.schedule }}</div>
   <div class="row">
-    <b class="col-md-2">Extenciones del anuncio:</b>
-    d
+    <b class="col-md-3">Extenciones del anuncio:</b>
+    {{ account.campaing.extension1 }}
   </div>
   <div class="row">
-    <b class="col-md-2">Extenciones del anuncio:</b>
-    d
+    <b class="col-md-3">Extenciones del anuncio:</b>
+    {{ account.campaing.extension2 }}
   </div>
 
   <div class="extension-container">
