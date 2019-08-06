@@ -40,7 +40,5 @@ export class GoogleCampaingComponent implements OnInit {
   getGroups(form: FormGroup) {
     this.groupFormState = form.valid;
     this.groups = form.value.groups;
-    console.log(this.groups.length);
-    
   }
 }

@@ -10,8 +10,26 @@ import { Group } from "src/app/group";
   styleUrls: ["./announcements.component.scss"]
 })
 export class AnnouncementsComponent extends CampaingStepps implements OnInit {
-  @Input() groups: Array<Group>;
-  form: FormArray;
+  @Input()
+  set groups(value: any) {
+    this.groupsNumber = JSON.parse(JSON.stringify(value));
+    for (const group of this.groupsNumber) {
+      this.googleService
+        .getAnnouncementsById(this.account.id, group.id)
+        .subscribe((announcements: Array<any>) => {
+          let arr = new FormArray([this.announcementForm()]);
+          group["announcementForm"] = new FormGroup({
+            announcements: arr
+          });
+          if (announcements.length) {
+            (group["announcementForm"].get(
+              "announcements"
+            ) as FormArray).setValue(announcements);
+          }
+        });
+    }
+  }
+
   titleLength = 30;
   descriptionLength = 90;
   groupsNumber = [];
@@ -28,13 +46,13 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.groupsNumber = JSON.parse(JSON.stringify(changes.groups.currentValue));
+    /*    this.groupsNumber = JSON.parse(JSON.stringify(changes.groups.currentValue));
     for (const group of this.groupsNumber) {
       const preValue = group.announcement ? group.announcement.value : {};
       group["form"] = new FormGroup({
         announcements: new FormArray([this.announcementForm(preValue)])
       });
-    }
+    } */
   }
 
   assignGroups(): void {}
@@ -61,7 +79,7 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
   }
 
   private getAnnouncementArray(group) {
-    return group.form.get("announcements") as FormArray;
+    return group.announcementForm.get("announcements") as FormArray;
   }
 
   duplicateForm(index: number, group) {
@@ -74,16 +92,18 @@ export class AnnouncementsComponent extends CampaingStepps implements OnInit {
   }
 
   saveForm() {
-    let groupInfo: Array<Group> = this.groupsNumber;
-    groupInfo = groupInfo.map((grp: any) => {
-      grp.announcements = grp.form.value.announcements;
-      console.log(grp);
-      
-      return grp;
-    });
-console.log();
+    const values: Array<any> = [];
 
-    this.googleService.saveGroups(groupInfo, this.account.id);
+    this.groupsNumber.map(item => {
+      values.push({
+        announcementForm: item.announcementForm.value,
+        id: item.id,
+        keywordsList: item.keywordsList,
+        type: item.type
+      });
+      return item;
+    });
+    this.googleService.saveAnnouncement(values, this.account.id);
   }
 
   formInfo() {

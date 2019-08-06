@@ -62,6 +62,7 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
 
   groupForm(group?: Group): FormGroup {
     const fg = new FormGroup({
+      id: new FormControl(),
       type: new FormControl(null, [Validators.required]),
       inputKeywords: new FormControl(),
       keywordsList: new FormControl(this.suggestedWords.toString(), [Validators.required])
@@ -78,7 +79,7 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
 
   onAddWord(index: number) {
     this.addWords(index);
-    this.saveForm();
+    this.saveForm(index);
   }
 
   addWords(index: number) {
@@ -96,12 +97,16 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
   }
 
   continue() {
-    this.saveForm();
     this.advanceStep();
   }
 
-  saveForm() {
-    this.campaingService.saveGroups(this.form.value.groups, this.account.id);
+  saveForm(index) {
+    
+    this.campaingService.saveGroup(this.groupsArray.controls[index].value, this.account.id).subscribe(
+      id => {
+        this.groupsArray.controls[index]['controls']['id'].setValue(id);
+      }
+    );
   }
 
   removeKeyWord(word: string, index: number) {
@@ -109,7 +114,7 @@ export class GroupsComponent extends CampaingStepps implements OnInit {
     const regex = `[,]*${word}[\\s]*`;
     const words = list.value.replace(new RegExp(regex), "") as string;
     list.setValue(words);
-    this.saveForm();
+    this.saveForm(index);
   }
 
   chip(index: number): Array<string> {

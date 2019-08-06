@@ -6,12 +6,12 @@
           <b>Grupo: </b>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <form [formGroup]="group.form" *ngIf="group.form">
+      <form [formGroup]="group.announcementForm" *ngIf="group.announcementForm" >
         <div
           class="blue-box kt-portlet"
           formArrayName="announcements"
           *ngFor="
-            let ex of group.form.get('announcements').controls;
+            let ex of group.announcementForm.get('announcements').controls;
             let i = index
           "
         >

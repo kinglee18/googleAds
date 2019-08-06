@@ -14,7 +14,7 @@
           <div class="col-md-3">
             <mat-form-field>
               <mat-label>Tipo</mat-label>
-              <mat-select formControlName="type" (selectionChange)="saveForm()">
+              <mat-select formControlName="type" (selectionChange)="saveForm(i)">
                 <mat-option
                   *ngFor="let groupType of groupTypes"
                   [value]="groupType.value"
