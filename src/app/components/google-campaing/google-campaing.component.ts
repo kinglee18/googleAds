@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { GoogleCampaingService } from "src/app/google-campaing.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Group } from 'src/app/group';
-import { Account } from 'src/app/account';
+import { Group } from "src/app/group";
+import { Account } from "src/app/account";
 
 @Component({
   selector: "app-google-campaing",
@@ -13,6 +13,7 @@ import { Account } from 'src/app/account';
 export class GoogleCampaingComponent implements OnInit {
   account: Account;
   groupFormState = true;
+  loaderState = true;
   groups: Array<Group> = [];
 
   constructor(
@@ -29,6 +30,7 @@ export class GoogleCampaingComponent implements OnInit {
   getAccountInfo(id: string) {
     this.campaingService.getAccount(id).subscribe(
       account => {
+        this.loaderState = false;
         this.account = new Account().deserialize(account);
       },
       error => {
@@ -41,5 +43,9 @@ export class GoogleCampaingComponent implements OnInit {
   getGroups(form: FormGroup) {
     this.groupFormState = form.valid;
     this.groups = form.value.groups;
+  }
+
+  updateLoader(state: boolean) {
+    this.loaderState = state;
   }
 }

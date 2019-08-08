@@ -1,10 +1,10 @@
 <div class="kt-grid">
   <div class="col-md-12">
     <div class="kt-portlet">
-      <h2 class="kt-portlet__head-title ng-star-inserted" *ngIf="account">
+      <h2 class="kt-portlet__head-title ng-star-inserted" >
         {{ account.name }}
       </h2>
-      <mat-horizontal-stepper #stepper linear *ngIf="account">
+      <mat-horizontal-stepper #stepper linear *ngIf="account && !loaderState">
         <mat-step>
           <ng-template matStepLabel>Cuenta</ng-template>
           <div>
@@ -88,6 +88,7 @@
             [stepper]="stepper"
             [account]="account"
             [groups]="groups"
+            (loader)="updateLoader($event)"
             *ngIf="groups.length"
           ></app-announcements>
         </mat-step>
@@ -125,7 +126,7 @@
           </div>
         </mat-step>
       </mat-horizontal-stepper>
-      <mat-spinner *ngIf="!account"></mat-spinner>
+      <mat-spinner *ngIf="loaderState"></mat-spinner>
     </div>
   </div>
 </div>

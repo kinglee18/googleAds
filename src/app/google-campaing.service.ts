@@ -101,4 +101,10 @@ export class GoogleCampaingService {
       }
     });
   }
+
+  finishCampaing(): Observable<any> {
+    return new Observable(observer => {
+      observer.next();
+    });
+  }
 }

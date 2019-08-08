@@ -1,7 +1,8 @@
-import { Component, Input, SimpleChanges } from "@angular/core";
+import { Component, Input, SimpleChanges, Output, EventEmitter } from "@angular/core";
 import { CampaingStepps } from "src/app/campaing-stepps";
 import { FormBuilder, FormGroup, FormArray, FormControl } from "@angular/forms";
 import { GoogleCampaingService } from "src/app/google-campaing.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-announcements",
@@ -13,6 +14,8 @@ export class AnnouncementsComponent extends CampaingStepps {
   set groups(value: any) {
     this.fillAccordion(value);
   }
+
+  @Output() loader: EventEmitter<boolean> = new EventEmitter();
 
   titleLength = 30;
   descriptionLength = 90;
@@ -96,5 +99,9 @@ export class AnnouncementsComponent extends CampaingStepps {
     return {};
   }
 
-  finishCampaing() {}
+  finishCampaing() {
+    this.googleService.finishCampaing().subscribe(data => {
+      this.loader.emit(true);
+    });
+  }
 }

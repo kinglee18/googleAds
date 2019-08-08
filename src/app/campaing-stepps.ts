@@ -4,7 +4,7 @@ import { Account } from './account';
 
 export class CampaingStepps {
   @Input() private stepper: MatStepper;
-  @Input() protected account: Account;
+  @Input() public account: Account;
 
   protected advanceStep(): void {
     this.stepper.next();

@@ -5,6 +5,7 @@ import { CustomMaterialModule } from "src/app/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from '@angular/common/http';
 
 describe("AnnouncementsComponent", () => {
   let component: AnnouncementsComponent;
@@ -17,7 +18,8 @@ describe("AnnouncementsComponent", () => {
         CustomMaterialModule,
         ReactiveFormsModule,
         BrowserModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientModule
       ]
     }).compileComponents();
   }));

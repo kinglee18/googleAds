@@ -42,15 +42,12 @@ export class CampaingComponent extends CampaingStepps implements OnInit {
       textExtensions: this.fb.array([])
     });
     const campaing = this.account.campaing;
-    if (campaing) {
-      this.form.patchValue(campaing);
-      this.addDynamicForms(
-        campaing.announcementExtensions,
-        campaing.textExtensions
-      );
-    } else {
-      this.addDynamicForms();
-    }
+
+    this.form.patchValue(campaing);
+    this.addDynamicForms(
+      campaing.announcementExtensions,
+      campaing.textExtensions
+    );
   }
 
   addDynamicForms(
